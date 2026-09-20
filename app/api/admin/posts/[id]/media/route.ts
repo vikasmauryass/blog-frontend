@@ -50,16 +50,22 @@ export async function POST(
 		);
 
 		return NextResponse.json({ data: media }, { status: 201 });
-	} catch (error: any) {
+	} catch (error: unknown) {
 		console.error("Upload media error:", error);
+
+		const err = error as {
+			message?: string;
+			data?: { errors?: unknown };
+			status?: number;
+		};
 
 		return NextResponse.json(
 			{
-				message: error?.message || "Failed to upload media.",
-				errors: error?.data?.errors || undefined,
+				message: err?.message || "Failed to upload media.",
+				errors: err?.data?.errors || undefined,
 			},
 			{
-				status: error?.status || 500,
+				status: err?.status || 500,
 			},
 		);
 	}

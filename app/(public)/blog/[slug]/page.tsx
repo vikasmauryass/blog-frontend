@@ -67,13 +67,18 @@ export default async function BlogDetailPage({
 
 	try {
 		post = await getPostBySlug(slug);
-	} catch (error: any) {
-		if (error?.status === 404) {
-			notFound();
-		}
+	} catch (error: unknown) {
+    if (
+      typeof error === "object" &&
+      error !== null &&
+      "status" in error &&
+      (error as { status: unknown }).status === 404
+    ) {
+      notFound();
+    }
 
-		throw error;
-	}
+    throw error;
+  }
 
 	return (
 		<main className="min-h-screen bg-slate-50">
