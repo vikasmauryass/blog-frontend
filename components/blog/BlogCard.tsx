@@ -1,6 +1,6 @@
 import type { Post } from "@/types/post";
+import Image from "next/image";
 import Link from "next/link";
-
 interface BlogCardProps {
 	post: Post;
 }
@@ -37,7 +37,7 @@ export default function BlogCard({ post }: BlogCardProps) {
 			<Link href={`/blog/${post.slug}`} className="block overflow-hidden">
 				<div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100">
 					{imageUrl ? (
-						<img
+						<Image
 							src={imageUrl}
 							alt={imageAlt}
 							className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
