@@ -17,14 +17,7 @@ function formatDate(dateString: string | null) {
 	return `${day}/${month}/${year}`;
 }
 
-// function getPostImage(post: Post) {
-// 	return post.media?.find((media) => media.mime_type?.startsWith("image/"))
-// 		?.url;
-// }
-
 export default function BlogCard({ post }: BlogCardProps) {
-	// const imageUrl = getPostImage(post);
-
 	const image = post.media?.find((media) =>
 		media.mime_type?.startsWith("image/"),
 	);
@@ -40,6 +33,8 @@ export default function BlogCard({ post }: BlogCardProps) {
 						<Image
 							src={imageUrl}
 							alt={imageAlt}
+							fill
+							sizes="(max-width: 768px) 100vw, 33vw"
 							className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
 						/>
 					) : (
